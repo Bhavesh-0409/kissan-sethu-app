@@ -34,6 +34,7 @@ interface AdviceResponse {
 
 export function CropAdviceForm({ crops }: CropAdviceFormProps) {
   const { t } = useLanguage()
+  const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [advice, setAdvice] = useState<AdviceResponse | null>(null)
   const [formData, setFormData] = useState({
@@ -50,6 +51,7 @@ export function CropAdviceForm({ crops }: CropAdviceFormProps) {
     e.preventDefault()
     setIsLoading(true)
     setAdvice(null)
+    setError(null)
 
     try {
       const response = await fetch("/api/crop-advice", {
@@ -69,14 +71,15 @@ export function CropAdviceForm({ crops }: CropAdviceFormProps) {
       })
 
       if (!response.ok) {
-        throw new Error("Failed to get advice")
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to get advice")
       }
 
       const result = await response.json()
       setAdvice(result)
     } catch (error) {
       console.error("Error getting advice:", error)
-      alert("Failed to get crop advice. Please try again.")
+      setError(error instanceof Error ? error.message : "Failed to get crop advice. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -93,6 +96,13 @@ export function CropAdviceForm({ crops }: CropAdviceFormProps) {
           <CardTitle>{t("cropAdvice.getAdvice")}</CardTitle>
         </CardHeader>
         <CardContent>
+          {error && (
+            <Alert className="mb-4 border-red-200 bg-red-50">
+              <AlertTriangle className="h-4 w-4 text-red-600" />
+              <AlertDescription className="text-red-800">{error}</AlertDescription>
+            </Alert>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>

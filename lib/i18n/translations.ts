@@ -57,6 +57,16 @@ export const translations = {
     getAdviceBtn: "Get AI Advice",
     adviceHistory: "Advice History",
     confidence: "Confidence",
+    cropAdvice: {
+      getAdvice: "Get Crop Advice",
+      crop: "Crop",
+      location: "Location",
+      season: "Season",
+      adviceType: "Advice Type",
+      selectCrop: "Select a crop",
+      selectSeason: "Select season",
+      selectAdviceType: "Select advice type",
+    },
 
     // Learning
     learningHub: "Learning Hub",
@@ -155,6 +165,16 @@ export const translations = {
     getAdviceBtn: "AI सलाह लें",
     adviceHistory: "सलाह का इतिहास",
     confidence: "विश्वसनीयता",
+    cropAdvice: {
+      getAdvice: "फसल सलाह लें",
+      crop: "फसल",
+      location: "स्थान",
+      season: "मौसम",
+      adviceType: "सलाह प्रकार",
+      selectCrop: "फसल चुनें",
+      selectSeason: "मौसम चुनें",
+      selectAdviceType: "सलाह प्रकार चुनें",
+    },
 
     // Learning
     learningHub: "शिक्षा केंद्र",
